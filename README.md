@@ -1,4 +1,4 @@
-# EDA-in-SQL
+# Data Science salary EDA-in-SQL
 
 The provided SQL code offers comprehensive data management and analysis for the data_science.ds_salaries table in a salaries database. 
 
