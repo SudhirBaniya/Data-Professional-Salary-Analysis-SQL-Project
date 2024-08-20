@@ -16,79 +16,89 @@ company_location varchar(50),
 company_size varchar(50)
 )
 
-# Retrieve all records
+-- 1. Retrieve all records
 
 select * from data_science.ds_salaries;
 
-# Retrieve specific column such as job_title, salary, company_size.
+-- 2. Retrieve specific columns such as job_title, salary, company_size.
 
 select job_title, salary, company_size 
 from  data_science.ds_salaries;
 
-# Find all job title with a salary greater than 100000;
+-- 3. Find all job titles with a salary greater than 100000;
 
 select * from data_science.ds_salaries 
 where salary > 100000;
 
-# List employees with a specific job title such as 'data scientist';
+-- 4. List employees with a specific job title such as 'data scientist';
 
 select * from data_science.ds_salaries 
 where job_title = 'data scientist';
 
-# calculate the avarage salary
+-- 5. calculate the average salary
 
-select avg(salary) as avarage_salary 
+select avg(salary) as average_salary 
 from  data_science.ds_salaries;
 
-# count the number of employees in each job title;
+-- 6. count the number of employees in each job title;
 
-select job_title, count(*) as num_employees 
-from  data_science.ds_salaries group by job_title;
+select job_title, 
+count(*) as num_employees 
+from  data_science.ds_salaries 
+group by job_title;
 
-# find the avarage salary by job title;
+-- 7. find the average salary by job title;
 
-select job_title, avg(salary) as avarage_salary 
-from  data_science.ds_salaries group by job_title;
-
-
-# calculate the total number of employee by company size and location;
-
-select company_size, count(*) as total_employees 
-from  data_science.ds_salaries group by company_size;
+select job_title, avg(salary) as average_salary 
+from  data_science.ds_salaries 
+group by job_title;
 
 
-select company_location, count(*) as total_employees 
-from  data_science.ds_salaries group by company_location;
+-- 8. Calculate the total number of employees by company size and location;
+
+select company_size, 
+count(*) as total_employees 
+from  data_science.ds_salaries
+group by company_size;
 
 
-# find the top 5 highest salary;
+select company_location, 
+count(*) as total_employees 
+from  data_science.ds_salaries 
+group by company_location;
+
+
+-- 9. Find the top 5 highest salaries;
 
 select * from data_science.ds_salaries 
-order by salary desc limit 5;
+order by salary 
+desc limit 5;
 
-# Retrieve the employees who have the maximum salary in each job title;
+-- 10. Retrieve the employees who have the maximum salary in each job title;
 
 select job_title, max(salary) as max_salary 
-from  data_science.ds_salaries group by job_title;
+from  data_science.ds_salaries 
+group by job_title;
 
 
-#  List all employees whose salary is above the avarage salary;
-
+-- 11. List all employees whose salary is above the average salary;
 
 select * from  data_science.ds_salaries
-where salary > (select avg (salary) from data_science.ds_salaries);
+where salary > (select avg (salary) 
+from data_science.ds_salaries);
 
 
-#  calculate the cumulative salary for employees;
+-- 12. calculate the cumulative salary for employees;
 
-select *, sum(salary) over (order by work_year) as cumulative_salary
+select *, 
+sum(salary) over (order by work_year) as cumulative_salary
 from  data_science.ds_salaries;
 
-#  Rank employees by salary within each job title;
+-- 13. Rank employees by salary within each job title;
 
 select *,
-        rank() over (partition by job_title order by salary desc) as salary_rank 
-        from  data_science.ds_salaries;
+rank() over (partition by job_title order by salary desc) as salary_rank 
+from  data_science.ds_salaries;
         
         
         
